@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+        .menu-container {
+            background: white;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .restaurant-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6c5ce7;
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tabs button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #6c5ce7;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .tabs button.active {
+            background: #5a4dbf;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .menu-item.selected {
+            background: #e8eaf6;
+        }
+        .menu-item label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .menu-item input {
+            cursor: pointer;
+        }
+        .price {
+            font-weight: bold;
+            color: #6c5ce7;
+        }
+        .total {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #6c5ce7;
+        }
+        .order-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .order-btn:hover {
+            background: #5a4dbf;
+        }
+        .table-selection {
+            margin-bottom: 20px;
+        }
+        .table-selection select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #6c5ce7;
+            font-size: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="restaurant-name">Delicious Bites Restaurant</div>
+
+        <div class="table-selection">
+            <label for="table-number">Select Table:</label>
+            <select id="table-number">
+                <option value="1">Table 1</option>
+                <option value="2">Table 2</option>
+                <option value="3">Table 3</option>
+                <option value="4">Table 4</option>
+                <option value="5">Table 5</option>
+            </select>
+        </div>
+
+        <div class="tabs">
+            <button class="active" onclick="showCategory('vegetarian')">Vegetarian</button>
+            <button onclick="showCategory('chicken')">Chicken</button>
+        </div>
+
+        <div id="vegetarian" class="category">
+            <div class="menu-item" onclick="toggleItem(this, 'SUBZI YON KA MILAN', 15)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    SUBZI YON KA MILAN - Assorted vegetables in unique gravy
+                </label>
+                <span class="price">Rupees : 15</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'PAREER CORN PALAK', 17)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    PAREER CORN PALAK - Cottage cheese and yellow corn tossed with creamy spinach
+                </label>
+                <span class="price">Rupees : 17</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'LASOONI PALAK', 12)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    LASOONI PALAK - Creamy spinach tossed with garlic, cumin, and onions
+                </label>
+                <span class="price">Rupees : 12</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'ALOO GOBI BANARS!', 13)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    ALOO GOBI BANARS! - Potato wedges and cauliflower florets tossed with dry masala and cooked over a dum
+                </label>
+                <span class="price">Rupees : 13</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'SUBZI MAKAHANI/KADAI', 14)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    SUBZI MAKAHANI/KADAI - Vegetables in Makhani or Kadai gravy
+                </label>
+                <span class="price">Rupees : 14</span>
+            </div>
+        </div>
+
+        <div id="chicken" class="category hidden">
+            <div class="menu-item" onclick="toggleItem(this, 'MURG MAKHANI', 20)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    MURG MAKHANI - Shredded chicken in creamy tomato gravy
+                </label>
+                <span class="price">Rupees : 20</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'MURG TIKKA MASALA', 19)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    MURG TIKKA MASALA - Chicken in spicy onion-tomato gravy
+                </label>
+                <span class="price">Rupees : 19</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'MURG DHABA BOMBAY STYLE', 20)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    MURG DHABA BOMBAY STYLE - Morsels of chicken simmered in spicy gravy with black peppers, spices, and herbs
+                </label>
+                <span class="price">Rupees : 20</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'MORG KHOLHAPURI', 19)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    MORG KHOLHAPURI - Morsels of chicken cooked in a spicy Kolhapuri masala
+                </label>
+                <span class="price">Rupees : 19</span>
+            </div>
+            <div class="menu-item" onclick="toggleItem(this, 'CHICKEN BHUNA', 17)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                    CHICKEN BHUNA
+                </label>
+                <span class="price">Rupees : 17</span>
+            </div>
+        </div>
+
+        <div class="total">Total: Rupees : <span id="total">0.00</span></div>
+        <button class="order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <script>
+        let totalAmount = 0;
+        let orderItems = new Map();
+
+        function toggleItem(item, name, price) {
+            const checkbox = item.querySelector('input');
+            checkbox.checked = !checkbox.checked;
+
+            if (checkbox.checked) {
+                totalAmount += price;
+                orderItems.set(name, price);
+                item.classList.add('selected');
+            } else {
+                totalAmount -= price;
+                orderItems.delete(name);
+                item.classList.remove('selected');
+            }
+            document.getElementById('total').textContent = totalAmount.toFixed(2);
+        }
+
+        function showCategory(category) {
+            document.querySelectorAll('.category').forEach(cat => cat.classList.add('hidden'));
+            document.getElementById(category).classList.remove('hidden');
+
+            document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function placeOrder() {
+            const tableNumber = document.getElementById('table-number').value;
+            if (!tableNumber) {
+                alert("Please select a table number.");
+                return;
+            }
+            if (orderItems.size === 0) {
+                alert("Please select at least one item.");
+                return;
+            }
+
+            let orderDetails = `Ordered from Table number: ${tableNumber}\n`;
+            orderItems.forEach((price, item) => {
+                orderDetails += `${item} - Rupees ${price.toFixed(2)}\n`;
+            });
+            orderDetails += `Total: Rupees ${totalAmount.toFixed(2)}`;
+
+            alert("Order placed!\n\n" + orderDetails);
+
+            const phoneNumber = "7997987584"; // Replace with actual WhatsApp number
+            const message = encodeURIComponent(orderDetails);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.open(whatsappUrl, "_blank");
+        }
+    </script>
+</body>
+</html>
